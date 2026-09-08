@@ -95,6 +95,7 @@ so the whole game stays ~400 KB and works offline.
 | `npm run verify:single` | Boot-test that single file (replays its module loader in Node) |
 | `npm run tunnel` | Publish the local PWA at a public `https://….lhr.life` URL (no account) |
 | `npm run publish:github` | Create the GitHub repo and push (reads `GITHUB_TOKEN` from env, never from disk) |
+| `npm run deploy` | Publish to GitHub Pages from the `gh-pages` branch — no CI or runner required |
 
 ---
 
@@ -162,6 +163,13 @@ test possible — it runs in ~113 ms with no browser.
 
 ## Deploying
 
+**Two GitHub Pages paths, one result.** `npm run deploy` publishes from the
+`gh-pages` branch and needs no runner, so it works even where GitHub Actions
+does not. `.github/workflows/pages.yml` is the same deployment as a workflow
+for accounts with Actions enabled (repo Settings → Actions → enable): it runs
+lint + tests first, then deploys `apps/web/`. Point Pages at whichever you
+prefer (Settings → Pages → Build and deployment → Source).
+
 ```bash
 # PWA — upload apps/web/ to any static host. Serve over HTTPS (required for service
 # workers). No build, no bundler, no pipeline.
@@ -175,10 +183,12 @@ npm run dev &            # PWA on :8080
 npm run tunnel           # prints https://<id>.lhr.life
 
 # …or let GitHub Pages host it permanently (free, HTTPS, no tunnel churn):
-export GITHUB_TOKEN=ghp_…   # needs the "repo" scope; add "pages: write" for the next step
+export GITHUB_TOKEN=ghp_…   # or rely on your existing git credentials
+npm run deploy              # builds, commits apps/web to gh-pages, pushes
+# Live at https://<you>.github.io/digipoke/ within ~30s — no CI involved
+
+# …or set up the repository and push it in one step:
 npm run publish:github -- --pages
-# Then: Settings → Pages → Source: GitHub Actions (done for you with --pages)
-# Live at https://<you>.github.io/digipoke/ after the Deploy Pages workflow runs
 
 # Sync API (optional)
 PORT=4000 DIGIPOKE_ORIGIN=https://digipoke.example.com node server/src/server.js
@@ -194,7 +204,8 @@ When you change any shell asset, bump `CACHE_VERSION` in `apps/web/sw.js`.
 | Path | Purpose |
 |---|---|
 | `.github/workflows/ci.yml` | Lint + 40 tests + single-file build on every push and PR (Node 20 & 22) |
-| `.github/workflows/pages.yml` | Deploys `apps/web/` to GitHub Pages, gated on the same checks |
+| `.github/workflows/pages.yml` | Deploys `apps/web/` to GitHub Pages, gated on the same checks (needs Actions enabled) |
+| `.github/assets/banner.{svg,png}` | Repository banner, rendered by `npm run banner` from the shipped art code |
 | `tools/publish-github.mjs` | Creates/reuses the repo, pushes, optionally enables Pages |
 | `LICENSE` | MIT |
 
