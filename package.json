@@ -21,7 +21,8 @@
     "build:single": "node tools/build-single.mjs",
     "verify:single": "node tools/verify-single.mjs",
     "art": "node tools/gallery.mjs",
-    "tunnel": "ssh -tt -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -R 80:localhost:8080 nokey@localhost.run"
+    "tunnel": "ssh -tt -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -R 80:localhost:8080 nokey@localhost.run",
+    "publish:github": "node tools/publish-github.mjs"
   },
   "devDependencies": {
     "fake-indexeddb": "^6.2.5",

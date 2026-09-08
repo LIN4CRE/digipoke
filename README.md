@@ -79,6 +79,7 @@ so the whole game stays ~400 KB and works offline.
 | `npm run build:single` | Bundle everything into one self-contained `dist/digipoke.html` |
 | `npm run verify:single` | Boot-test that single file (replays its module loader in Node) |
 | `npm run tunnel` | Publish the local PWA at a public `https://….lhr.life` URL (no account) |
+| `npm run publish:github` | Create the GitHub repo and push (reads `GITHUB_TOKEN` from env, never from disk) |
 
 ---
 
@@ -158,12 +159,34 @@ npm run verify:single    # boots it headlessly and plays the first two steps
 npm run dev &            # PWA on :8080
 npm run tunnel           # prints https://<id>.lhr.life
 
+# …or let GitHub Pages host it permanently (free, HTTPS, no tunnel churn):
+export GITHUB_TOKEN=ghp_…   # needs the "repo" scope; add "pages: write" for the next step
+npm run publish:github -- --pages
+# Then: Settings → Pages → Source: GitHub Actions (done for you with --pages)
+# Live at https://<you>.github.io/digipoke/ after the Deploy Pages workflow runs
+
 # Sync API (optional)
 PORT=4000 DIGIPOKE_ORIGIN=https://digipoke.example.com node server/src/server.js
 # Put it behind an HTTPS reverse proxy and back up data/store.json.
 ```
 
 When you change any shell asset, bump `CACHE_VERSION` in `apps/web/sw.js`.
+
+---
+
+## Repository layout on GitHub
+
+| Path | Purpose |
+|---|---|
+| `.github/workflows/ci.yml` | Lint + 40 tests + single-file build on every push and PR (Node 20 & 22) |
+| `.github/workflows/pages.yml` | Deploys `apps/web/` to GitHub Pages, gated on the same checks |
+| `tools/publish-github.mjs` | Creates/reuses the repo, pushes, optionally enables Pages |
+| `LICENSE` | MIT |
+
+`npm run publish:github` takes the token from the `GITHUB_TOKEN` environment
+variable only — never an argument (shell history leaks), never a file, never
+committed, and it rewrites the git remote back to a clean URL after pushing so
+no credential is left in `.git/config`.
 
 ---
 
