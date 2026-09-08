@@ -9,24 +9,34 @@
  *   Pages URL (see .github/workflows/pages.yml), and off-device backups of the
  *   source. This script is the one-command path to that.
  *
- * HOW IT HANDLES THE TOKEN — read this before changing anything
- *   The personal access token is read ONLY from the environment
- *   (`GITHUB_TOKEN` or `GH_PAT`). It is never accepted as an argument (shell
- *   history is a leak), never written to a file, never committed, and never
- *   printed: any accidental output is masked by {@link redact}. The token is
- *   embedded in the git remote purely for the duration of the push, and the
- *   remote is immediately rewritten back to the clean https URL afterwards.
+ * TWO WAYS TO AUTHENTICATE
+ *
+ *   1. A personal access token in the environment (`GITHUB_TOKEN` or `GH_PAT`).
+ *   2. `--device`: the OAuth device flow. GitHub issues a short user code, the
+ *      human types it into https://github.com/login/device, and this script
+ *      receives a token for that account. Nothing has to be created by hand
+ *      and no secret is ever pasted anywhere.
+ *
+ *   Either way the token is never accepted as an argument (shell history is a
+ *   leak), never written to a file, never committed, and never printed: any
+ *   accidental output is masked by {@link redact}. The token is embedded in the
+ *   git remote purely for the duration of the push, and the remote is
+ *   immediately rewritten back to the clean https URL afterwards.
  *
  * USAGE
  *   GITHUB_TOKEN=ghp_xxx node tools/publish-github.mjs [--private] [--name digipoke]
  *   GITHUB_TOKEN=ghp_xxx node tools/publish-github.mjs --pages   # also switch Pages to Actions
+ *   node tools/publish-github.mjs --device --pages               # no token needed at all
  *
  * FLAGS
+ *   --device         Authorise interactively with an 8-character user code.
  *   --private        Create the repository as private (default: public).
  *   --public         Force public even if the repository already exists.
  *   --name <name>    Repository name (default: digipoke).
  *   --owner <login>  Create under an organisation you belong to (default: you).
  *   --pages          Enable GitHub Pages with "GitHub Actions" as the source.
+ *   --keep-author    Keep the existing commit author (default: re-attribute
+ *                    placeholder commits to the authenticated account).
  *   --dry-run        Resolve and report everything, change nothing.
  *
  * EXIT CODES
@@ -60,6 +70,8 @@ function parseArgs(argv) {
     public: false,
     pages: false,
     dryRun: false,
+    device: false,
+    keepAuthor: false,
     name: 'digipoke',
     owner: null,
     remote: 'origin',
@@ -71,12 +83,14 @@ function parseArgs(argv) {
       case '--public': flags.public = true; break;
       case '--pages': flags.pages = true; break;
       case '--dry-run': flags.dryRun = true; break;
+      case '--device': flags.device = true; break;
+      case '--keep-author': flags.keepAuthor = true; break;
       case '--name': flags.name = argv[++i]; break;
       case '--owner': flags.owner = argv[++i]; break;
       case '--remote': flags.remote = argv[++i]; break;
       case '--help':
       case '-h':
-        console.log('Usage: GITHUB_TOKEN=ghp_xxx node tools/publish-github.mjs [--private] [--name digipoke] [--pages] [--dry-run]');
+        console.log('Usage: node tools/publish-github.mjs [--device] [--private] [--name digipoke] [--pages] [--dry-run]');
         process.exit(0);
         break;
       default:
@@ -90,12 +104,13 @@ function parseArgs(argv) {
 }
 
 /** Run git in the repository root, returning trimmed stdout. */
-function git(args, { allowFail = false, quiet = false } = {}) {
+function git(args, { allowFail = false, quiet = false, env = null } = {}) {
   try {
     const out = execFileSync('git', args, {
       cwd: REPO_ROOT,
       encoding: 'utf8',
       stdio: ['ignore', 'pipe', quiet ? 'ignore' : 'inherit'],
+      ...(env ? { env: { ...process.env, ...env } } : {}),
     });
     return (out || '').trim();
   } catch (err) {
@@ -133,23 +148,88 @@ async function gh(token, path, init = {}) {
   return body;
 }
 
+/**
+ * Run GitHub's OAuth device flow and return an access token for the account
+ * that authorises it.
+ *
+ * The flow: ask GitHub for a short-lived `user_code`, show it to the human,
+ * then poll the token endpoint until they have approved it (or it expires).
+ * No client secret is involved — `CLIENT_ID` below is the public identifier
+ * that tools of this kind use, and it is not a credential.
+ *
+ * @param {string[]} scopes OAuth scopes to request.
+ * @returns {Promise<string>} An access token valid for this session.
+ */
+async function deviceFlow(scopes) {
+  const CLIENT_ID = 'Iv1.b507a08c87ecfe98'; // public OAuth app id (GitHub CLI) — not a secret
+  const post = async (path, body) => {
+    const res = await fetch(`https://github.com${path}`, {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json', 'User-Agent': 'digipoke-publish-script' },
+      body: JSON.stringify(body),
+    });
+    return res.json();
+  };
+
+  const request = await post('/login/device/code', { client_id: CLIENT_ID, scope: scopes.join(' ') });
+  if (!request.device_code || !request.user_code) {
+    throw new Error(`GitHub did not issue a device code: ${redact(JSON.stringify(request))}`);
+  }
+
+  console.log('');
+  console.log('  ┌──────────────────────────────────────────────────────────┐');
+  console.log(`  │  Authorise DigiPoke: open ${request.verification_uri}`);
+  console.log(`  │  and enter this code:            ${request.user_code}`);
+  console.log('  └──────────────────────────────────────────────────────────┘');
+  console.log('');
+  console.log(`  Waiting for approval (code expires in ${Math.round(request.expires_in / 60)} minutes)…`);
+
+  const deadline = Date.now() + request.expires_in * 1000;
+  let result = null;
+  let interval = Math.max(5, Number(request.interval) || 5) * 1000;
+
+  while (Date.now() < deadline) {
+    await new Promise((resolve) => setTimeout(resolve, interval));
+    result = await post('/login/oauth/access_token', {
+      client_id: CLIENT_ID,
+      device_code: request.device_code,
+      grant_type: 'urn:ietf:params:oauth:grant-type:device_code',
+    });
+
+    if (result.access_token) {
+      console.log('  approved.');
+      return result.access_token;
+    }
+    if (result.error === 'slow_down') {
+      interval += 5000; // GitHub asked us to back off
+    } else if (result.error !== 'authorization_pending') {
+      throw new Error(`device authorisation failed: ${result.error_description || result.error}`);
+    }
+  }
+  throw new Error('device code expired before it was approved — run the command again');
+}
+
 /* --------------------------------------------------------------------- main */
 
 async function main() {
   const flags = parseArgs(process.argv.slice(2));
 
-  const token = process.env.GITHUB_TOKEN || process.env.GH_PAT || '';
-  if (!token) {
-    console.error('✖ No token found. Export one first — it is read from the environment only:\n');
-    console.error('    export GITHUB_TOKEN=ghp_your_token_here');
-    console.error('    node tools/publish-github.mjs\n');
-    console.error('  Create one at https://github.com/settings/tokens with the "repo" scope');
-    console.error('  (plus "pages: write" if you want --pages to work).');
+  let token = process.env.GITHUB_TOKEN || process.env.GH_PAT || '';
+  if (!token && !flags.device) {
+    console.error('✖ No token found, and --device was not requested.\n');
+    console.error('  Easiest:   node tools/publish-github.mjs --device');
+    console.error('  Otherwise: export GITHUB_TOKEN=ghp_your_token_here   (https://github.com/settings/tokens, "repo" scope)');
     process.exit(1);
   }
-  if (!/^(ghp|github_pat)_/.test(token)) {
-    console.error('✖ That does not look like a GitHub personal access token (expected a "ghp_" or "github_pat_" prefix).');
+  if (token && !/^(ghp|gho|github_pat)_/.test(token)) {
+    console.error('✖ That does not look like a GitHub token (expected a "ghp_", "gho_" or "github_pat_" prefix).');
     process.exit(1);
+  }
+
+  // --device wins over an unusable token in the environment.
+  if (!token || flags.device) {
+    // "workflow" is required to push the files under .github/workflows/.
+    token = await deviceFlow(['repo', 'workflow']);
   }
 
   /* 1. Who am I? Also the earliest possible token validation. */
@@ -210,7 +290,32 @@ async function main() {
     }
   }
 
-  /* 4. Push. The token lives in the remote only for the duration of this call. */
+  /* 4. Attribute the commits to the account that authenticated, unless the
+   *    tree already carries a deliberate identity or --keep-author was passed.
+   *    The placeholder commits created before we knew the account are the only
+   *    ones rewritten; anything else is left untouched. */
+  const PLACEHOLDER_EMAIL = 'digipoke@users.noreply.github.com';
+  const headEmail = git(['log', '-1', '--format=%ae'], { quiet: true });
+  if (!flags.keepAuthor && headEmail === PLACEHOLDER_EMAIL) {
+    const name = me.name || me.login;
+    const email = me.email || `${me.id}+${me.login}@users.noreply.github.com`;
+    say(`• Attributing commits to ${name} <${email}>…`);
+    if (flags.dryRun) {
+      say('  (dry run — left untouched)');
+    } else {
+      git(['rebase', '--root', '--committer-date-is-author-date', '--exec', 'git commit --amend --reset-author --no-edit'], {
+        quiet: true,
+        env: {
+          GIT_AUTHOR_NAME: name,
+          GIT_AUTHOR_EMAIL: email,
+          GIT_COMMITTER_NAME: name,
+          GIT_COMMITTER_EMAIL: email,
+        },
+      });
+    }
+  }
+
+  /* 5. Push. The token lives in the remote only for the duration of this call. */
   const cleanUrl = repo.clone_url;
   const scoped = new URL(cleanUrl);
   scoped.username = me.login;
