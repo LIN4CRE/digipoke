@@ -21,3 +21,8 @@ npm-debug.log*
 
 # Generated art previews — regenerate with `npm run art`
 previews/
+
+# Generated one-file build — regenerate with `npm run build:single`.
+# Kept out of git on purpose: it is 400 KB of generated output, CI rebuilds it
+# on every push and uploads it as a workflow artifact.
+dist/
