@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="DigiPoke">
+  <!-- Maskable variant: keeps all critical art inside the 80% safe zone. -->
+  <defs>
+    <linearGradient id="gm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c5cff"/>
+      <stop offset="100%" stop-color="#23d5ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#0b1020"/>
+  <circle cx="256" cy="256" r="150" fill="url(#gm)" opacity="0.22"/>
+  <path d="M256 130 L366 194 V306 L256 370 L146 306 V194 Z"
+        fill="none" stroke="url(#gm)" stroke-width="22" stroke-linejoin="round"/>
+  <ellipse cx="216" cy="242" rx="21" ry="25" fill="#0b1020"/>
+  <ellipse cx="296" cy="242" rx="21" ry="25" fill="#0b1020"/>
+  <circle cx="222" cy="235" r="7" fill="#ffffff"/>
+  <circle cx="302" cy="235" r="7" fill="#ffffff"/>
+  <circle cx="256" cy="296" r="22" fill="#23d5ff"/>
+</svg>
