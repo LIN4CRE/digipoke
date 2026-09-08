@@ -289,20 +289,23 @@ async function main() {
     }
   }
 
-  /* 4. Attribute the commits to the account that authenticated, unless the
-   *    tree already carries a deliberate identity or --keep-author was passed.
-   *    The placeholder commits created before we knew the account are the only
-   *    ones rewritten; anything else is left untouched. */
+  /* 4. Attribute the commits to the account that authenticated. Commits made
+   *    before the account was known carry a placeholder author; every one of
+   *    them is rewritten, not just HEAD. Content is untouched — only the author
+   *    and committer identity changes. */
   const PLACEHOLDER_EMAIL = 'digipoke@users.noreply.github.com';
-  const headEmail = git(['log', '-1', '--format=%ae'], { quiet: true });
-  if (!flags.keepAuthor && headEmail === PLACEHOLDER_EMAIL) {
+  const hasPlaceholder = git(['log', '--format=%ae'], { quiet: true })
+    .split('\n')
+    .some((email) => email.trim() === PLACEHOLDER_EMAIL);
+
+  if (!flags.keepAuthor && hasPlaceholder) {
     const name = me.name || me.login;
     const email = me.email || `${me.id}+${me.login}@users.noreply.github.com`;
     say(`• Attributing commits to ${name} <${email}>…`);
     if (flags.dryRun) {
       say('  (dry run — left untouched)');
     } else {
-      git(['rebase', '--root', '--committer-date-is-author-date', '--exec', 'git commit --amend --reset-author --no-edit'], {
+      git(['rebase', '--root', '--committer-date-is-author-date', '--exec', 'git commit --amend --reset-author --no-edit -q'], {
         quiet: true,
         env: {
           GIT_AUTHOR_NAME: name,
