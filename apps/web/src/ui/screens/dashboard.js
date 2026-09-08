@@ -32,12 +32,17 @@ export function render(root) {
 
   startMusic('menu');
 
+  // Sequencing: on a brand-new save the objectives card is just three greyed
+  // rows shouting "locked". Hold it back until the coach card is dismissed so
+  // the first screen reads as one clear next step instead of five.
+  const firstRun = state.tutorialPending('nexus');
+
   const view = h('div.view.view--dashboard', [
     heroCard(s, team, zone),
     coachCard(),
-    objectivesCard(objectives),
+    firstRun ? null : objectivesCard(objectives),
     teamCard(team),
-    quickActionsCard(zone),
+    quickActionsCard(zone, firstRun),
   ]);
   renderInto(root, view);
 }
@@ -56,7 +61,10 @@ function heroCard(s, team, zone) {
         h('h1.hero__name', s.profile.displayName),
         h('div.hero__meta', [
           badge(`Tamer since ${new Date(s.profile.createdAt).toLocaleDateString('en-GB')}`, { kind: 'neutral' }),
-          badge(`Last seen ${timeAgo(s.profile.lastSeenAt)}`, { kind: 'neutral' }),
+          // "Last seen just now" is nonsense on a profile made five seconds ago.
+          Date.now() - new Date(s.profile.createdAt).getTime() < 60_000
+            ? badge('Just started', { kind: 'primary' })
+            : badge(`Last seen ${timeAgo(s.profile.lastSeenAt)}`, { kind: 'neutral' }),
         ]),
       ]),
       h('div.hero__shards', [
@@ -159,11 +167,11 @@ function teamCard(team) {
   );
 }
 
-function quickActionsCard(zone) {
+function quickActionsCard(zone, firstRun = false) {
   const actions = [
     {
       icon: '➤', title: 'Explore', text: `Scan ${zone.name} for wild digi-life.`,
-      kind: 'primary', onClick: () => navigate('/explore'),
+      kind: 'primary', hint: firstRun, onClick: () => navigate('/explore'),
     },
     {
       icon: '⚗', title: 'Lab', text: 'Evolve, train cores and tutor moves.',
@@ -180,12 +188,13 @@ function quickActionsCard(zone) {
   ];
 
   return card('Quick actions',
-    grid(actions.map((a) => h(`button.quick-action.quick-action--${a.kind}`, {
+    grid(actions.map((a) => h(`button.quick-action.quick-action--${a.kind}${a.hint ? '.is-hint' : ''}`, {
       type: 'button',
       onclick: () => { sfx.click(); a.onClick(); },
     }, [
       h('span.quick-action__icon', a.icon),
       h('div', [h('div.quick-action__title', a.title), h('div.quick-action__text', a.text)]),
+      a.hint ? badge('Start here', { kind: 'primary' }) : null,
     ])), { cols: '2' }),
   );
 }

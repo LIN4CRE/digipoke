@@ -58,6 +58,11 @@ jobs:
       - name: Test
         run: npm test
 
+      # Walks the opening flow like a new player: audio coverage, focus,
+      # responsiveness wiring and feedback on every step.
+      - name: Opening playtest
+        run: npm run playtest
+
       - name: Build single-file bundle
         run: npm run build:single
 

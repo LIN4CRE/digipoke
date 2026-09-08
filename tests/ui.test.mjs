@@ -175,11 +175,18 @@ test('onboarding: creates a vault, picks a starter and enters the Nexus', { skip
   assert.ok(document.querySelector('.launch__avatar svg'), 'the cinematic should show the Tamer');
   await waitFor(() => document.querySelector('.view--dashboard'), { label: 'dashboard', timeout: 12000 });
 
-  // The profile is real: name, starter and objectives are all rendered.
+  // The profile is real: the name and the stat grid are rendered, and the
+  // first-run primer is what greets a new player.
   const hero = document.querySelector('.hero__name')?.textContent?.trim();
   assert.equal(hero, 'Ada');
   assert.ok(document.querySelectorAll('.stat-box').length >= 6, 'expected the stat grid');
-  assert.ok(document.querySelectorAll('.objective').length === 3, 'expected three daily objectives');
+  assert.ok(document.querySelector('.help-list'), 'a new player should get a "what next" primer');
+  assert.equal(document.querySelectorAll('.objective').length, 0, 'objectives stay out of the way until the primer is dismissed');
+
+  // Dismissing the primer is what reveals the rest of the hub.
+  click(buttonWithText('Got it'));
+  await waitFor(() => document.querySelectorAll('.objective').length === 3, { label: 'daily objectives' });
+  assert.equal(document.querySelectorAll('.objective').length, 3, 'expected three daily objectives');
 });
 
 test('screens: every primary route renders without error', { skip: !available }, async () => {

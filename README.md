@@ -49,14 +49,23 @@ without them the UI test suite skips itself and everything else still runs.
 
 The first two minutes are hand-built, in five steps:
 
-1. **Splash** — animated starfield, the three starters idling, `Press Start`
-   (also the gesture that unlocks the audio context).
-2. **Identity** — name entry with live filtering, a vault passphrase with a
-   strength meter, and a Tamer ID card that fills in as you type.
+1. **Splash** — animated starfield and light shaft, the three starters named on
+   their pedestals, `Press Start` (also the gesture that unlocks the audio
+   context). The button is focused on load, so Enter starts the game.
+2. **Identity** — name entry with a live character counter, a passphrase with a
+   strength meter, an ID card whose Tamer ID is derived from the name as you
+   type, and a checklist that ticks itself off (so a disabled `Continue` is
+   never a mystery). Enter walks the form.
 3. **Appearance** — a procedural portrait with 6 option groups
-   (~98,000 combinations) rendered live on a lit stage, plus *Surprise me*.
-4. **Partner** — the three starters with portraits, stats, lore and moves.
-5. **Launch** — a "Digitising…" cinematic that hands off to the Nexus.
+   (~98,000 combinations) on a lit pedestal. Hovering or focusing an option
+   previews it without committing; choosing one fires sparks and keeps focus
+   where it was. Arrow keys move within a group, *Surprise me* re-rolls.
+4. **Partner** — three cards with a one-word playstyle tag, plus a dossier with
+   lore, stats that show the level-50 ceiling, starting moves and upcoming ones.
+5. **Launch** — a "Digitising…" cinematic with a real progress readout, a scan
+   line over your Tamer, and tap-or-Enter to skip. It then hands off to the
+   Nexus, where a primer and a highlighted **Start here** tile tell you exactly
+   what to do first.
 
 Every piece of art (34 creatures, NPCs, the Tamer) is generated as SVG from code,
 and every sound is synthesised at runtime — no image or audio files anywhere,
@@ -91,6 +100,7 @@ so the whole game stays ~400 KB and works offline.
 | `npm run lint` | Import resolution, precache list, placeholders, external URLs, **CSS class coverage** |
 | `npm run art` | Regenerate `previews/gallery.html` (every creature, Tamer avatars, expressions) |
 | `npm run banner` | Regenerate `.github/assets/banner.{svg,png}` from the shipped renderers |
+| `npm run playtest` | Walk the opening flow like a new player and report polish gaps (audio, focus, feedback) |
 | `npm run build:single` | Bundle everything into one self-contained `dist/digipoke.html` |
 | `npm run verify:single` | Boot-test that single file (replays its module loader in Node) |
 | `npm run tunnel` | Publish the local PWA at a public `https://….lhr.life` URL (no account) |

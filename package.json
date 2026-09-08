@@ -24,7 +24,8 @@
     "tunnel": "ssh -tt -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -R 80:localhost:8080 nokey@localhost.run",
     "publish:github": "node tools/publish-github.mjs",
     "banner": "node tools/banner.mjs",
-    "deploy": "node tools/deploy-pages.mjs"
+    "deploy": "node tools/deploy-pages.mjs",
+    "playtest": "node tools/playtest.mjs"
   },
   "devDependencies": {
     "fake-indexeddb": "^6.2.5",
