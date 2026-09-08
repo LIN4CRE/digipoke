@@ -101,6 +101,7 @@ so the whole game stays ~400 KB and works offline.
 | `npm run art` | Regenerate `previews/gallery.html` (every creature, Tamer avatars, expressions) |
 | `npm run banner` | Regenerate `.github/assets/banner.{svg,png}` from the shipped renderers |
 | `npm run playtest` | Walk the opening flow like a new player and report polish gaps (audio, focus, feedback) |
+| `npm run playtest:live` | Walk the opening flow of the *deployed* build and crawl every module it imports |
 | `npm run build:single` | Bundle everything into one self-contained `dist/digipoke.html` |
 | `npm run verify:single` | Boot-test that single file (replays its module loader in Node) |
 | `npm run tunnel` | Publish the local PWA at a public `https://….lhr.life` URL (no account) |

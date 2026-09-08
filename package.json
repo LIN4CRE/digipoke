@@ -25,7 +25,8 @@
     "publish:github": "node tools/publish-github.mjs",
     "banner": "node tools/banner.mjs",
     "deploy": "node tools/deploy-pages.mjs",
-    "playtest": "node tools/playtest.mjs"
+    "playtest": "node tools/playtest.mjs",
+    "playtest:live": "node tools/playtest-live.mjs"
   },
   "devDependencies": {
     "fake-indexeddb": "^6.2.5",
