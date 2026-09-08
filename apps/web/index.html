@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="nexus">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>DigiPoke — Raise, battle and evolve digital life</title>
+  <meta name="description" content="DigiPoke is a local-first creature-collecting battler: catch, train and evolve digital monsters entirely offline, with optional end-to-end encrypted sync." />
+  <meta name="theme-color" content="#0b1020" />
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="DigiPoke" />
+
+  <!-- Icons: inline SVG keeps the app asset-free and install-safe offline -->
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icon.svg" />
+
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/app.css" />
+  <script type="module" src="src/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#view">Skip to content</a>
+
+  <div class="app-shell">
+    <header class="topbar" id="topbar"></header>
+    <main class="view" id="view" tabindex="-1">
+      <div class="boot-screen">
+        <div class="boot-screen__mark"></div>
+        <p>Booting DigiPoke…</p>
+      </div>
+    </main>
+    <nav class="tabbar" id="tabbar" aria-label="Primary"></nav>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+
+  <noscript>
+    <div class="noscript">
+      <h1>JavaScript required</h1>
+      <p>DigiPoke is a local-first app: all of your data stays on this device, which means it runs entirely in your browser. Please enable JavaScript to continue.</p>
+    </div>
+  </noscript>
+</body>
+</html>

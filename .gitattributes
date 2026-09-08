@@ -1,0 +1,13 @@
+# Normalise line endings; keep the checked-out tree LF on every platform.
+* text=auto eol=lf
+
+# Binary assets — never diff, never translate.
+*.png binary
+*.jpg binary
+*.ico binary
+
+# Reviewable text
+*.svg text diff=image
+*.css text
+*.html text
+*.mjs text

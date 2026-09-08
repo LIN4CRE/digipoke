@@ -1,0 +1,51 @@
+{
+  "name": "DigiPoke — Digital Companion Battler",
+  "short_name": "DigiPoke",
+  "description": "A local-first creature-collecting battler: catch, train and evolve digital monsters entirely offline, with optional end-to-end encrypted sync.",
+  "id": "/digipoke",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#070b16",
+  "theme_color": "#0b1020",
+  "categories": ["games", "entertainment", "utilities"],
+  "lang": "en-GB",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Explore",
+      "short_name": "Explore",
+      "url": "./index.html#/explore",
+      "description": "Scan a zone for wild digi-life"
+    },
+    {
+      "name": "Lab",
+      "short_name": "Lab",
+      "url": "./index.html#/lab",
+      "description": "Evolve and train your creatures"
+    },
+    {
+      "name": "Ranch",
+      "short_name": "Ranch",
+      "url": "./index.html#/ranch",
+      "description": "Manage your roster"
+    }
+  ],
+  "prefer_related_applications": false
+}

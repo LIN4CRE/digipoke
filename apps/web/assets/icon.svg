@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="DigiPoke">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7c5cff"/>
+      <stop offset="55%" stop-color="#4a7cff"/>
+      <stop offset="100%" stop-color="#23d5ff"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#23d5ff"/>
+      <stop offset="100%" stop-color="#0b1020"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="#0b1020"/>
+  <circle cx="256" cy="256" r="196" fill="url(#g)" opacity="0.18"/>
+  <!-- Hexagonal monster silhouette -->
+  <path d="M256 60 L404 148 V300 L256 388 L108 300 V148 Z"
+        fill="none" stroke="url(#g)" stroke-width="26" stroke-linejoin="round"/>
+  <path d="M256 108 L362 170 V286 L256 348 L150 286 V170 Z"
+        fill="url(#g)" opacity="0.22"/>
+  <!-- Eyes -->
+  <ellipse cx="206" cy="228" rx="26" ry="30" fill="#0b1020"/>
+  <ellipse cx="306" cy="228" rx="26" ry="30" fill="#0b1020"/>
+  <circle cx="214" cy="220" r="9" fill="#ffffff"/>
+  <circle cx="314" cy="220" r="9" fill="#ffffff"/>
+  <!-- Core -->
+  <circle cx="256" cy="300" r="30" fill="url(#core)"/>
+</svg>

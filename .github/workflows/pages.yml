@@ -1,0 +1,79 @@
+# Deploy the PWA to GitHub Pages.
+#
+# `apps/web/` is the application: plain ES modules, no build step, so the
+# deployment artefact is the directory itself. That gives a permanent public
+# URL — https://<owner>.github.io/<repo>/ — with no tunnel and no account for
+# the player.
+#
+# ONE-TIME SETUP: repo Settings → Pages → Build and deployment → Source:
+# "GitHub Actions". Until that is switched on this workflow uploads the
+# artefact and the deploy step is skipped.
+#
+# The service worker registers with `sw.js` at scope `./`, so the app works
+# correctly at the /<repo>/ sub-path as well as at a domain root.
+
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Package apps/web
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      # Never publish a broken build: the same gates CI runs.
+      - name: Install test dependencies
+        run: npm ci
+
+      - name: Lint and test
+        run: |
+          npm run lint
+          npm test
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      # The single-file build is offered alongside the installed PWA at /single.
+      - name: Build single-file bundle
+        run: npm run build:single
+
+      - name: Copy single-file bundle into the site
+        run: cp dist/digipoke.html apps/web/single.html
+
+      - name: Upload site artefact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/web
+
+  deploy:
+    name: Publish
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

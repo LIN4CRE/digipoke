@@ -1,0 +1,23 @@
+# Dependencies — the app itself ships zero runtime dependencies.
+# jsdom and fake-indexeddb are test-only, but package-lock.json IS committed so
+# CI installs byte-identical versions.
+node_modules/
+.npm/
+
+# Server state — contains password hashes and encrypted vaults. Never commit.
+data/
+*.tmp
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Generated art previews — regenerate with `npm run art`
+previews/
