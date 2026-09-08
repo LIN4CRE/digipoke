@@ -269,7 +269,6 @@ async function main() {
         has_projects: false,
         has_wiki: false,
         auto_init: false, // we already have history; an initial commit would conflict
-        license_template: 'mit',
       }),
     });
     say(`  created ${repo.html_url}`);

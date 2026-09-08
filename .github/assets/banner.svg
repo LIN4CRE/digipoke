@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="DigiPoke — a local-first creature-collecting battler PWA">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#0a0e1c"/>
+      <stop offset="55%" stop-color="#101833"/>
+      <stop offset="100%" stop-color="#1b1030"/>
+    </linearGradient>
+    <radialGradient id="haze" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#7cf6ff" stop-opacity="0.20"/>
+      <stop offset="60%" stop-color="#b48cff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#b48cff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7cf6ff"/>
+      <stop offset="48%" stop-color="#b48cff"/>
+      <stop offset="100%" stop-color="#ff6b9d"/>
+    </linearGradient>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7cf6ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#7cf6ff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <path d="M0 0V640 M64 0V640 M128 0V640 M192 0V640 M256 0V640 M320 0V640 M384 0V640 M448 0V640 M512 0V640 M576 0V640 M640 0V640 M704 0V640 M768 0V640 M832 0V640 M896 0V640 M960 0V640 M1024 0V640 M1088 0V640 M1152 0V640 M1216 0V640 M1280 0V640 M0 0H1280 M0 64H1280 M0 128H1280 M0 192H1280 M0 256H1280 M0 320H1280 M0 384H1280 M0 448H1280 M0 512H1280 M0 576H1280 M0 640H1280" stroke="#7cf6ff" stroke-opacity="0.05" stroke-width="1" fill="none"/>
+  <ellipse cx="1010" cy="300" rx="430" ry="330" fill="url(#haze)"/>
+  <circle cx="1010" cy="300" r="250" fill="#0b1226" opacity="0.45"/>
+
+  <!-- wordmark -->
+  <text x="72" y="266" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="118" font-weight="700" letter-spacing="-3" fill="url(#title)">DigiPoke</text>
+  <rect x="74" y="304" width="300" height="4" fill="url(#rule)"/>
+  <text x="72" y="356" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="27" fill="#9fb0d0">A local-first creature battler — offline, installable, zero dependencies.</text>
+
+  
+    <g transform="translate(72 392)">
+      <rect width="156" height="44" rx="22" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
+      <circle cx="20" cy="22" r="6" fill="#ff6b3d"/>
+      <text x="36" y="28" fill="#c7d3ee" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18">34 species</text>
+    </g>
+    <g transform="translate(242 392)">
+      <rect width="167.6" height="44" rx="22" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
+      <circle cx="20" cy="22" r="6" fill="#b48cff"/>
+      <text x="36" y="28" fill="#c7d3ee" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18">10 elements</text>
+    </g>
+    <g transform="translate(423.6 392)">
+      <rect width="237.2" height="44" rx="22" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
+      <circle cx="20" cy="22" r="6" fill="#3db4ff"/>
+      <text x="36" y="28" fill="#c7d3ee" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18">Offline-first PWA</text>
+    </g>
+    <g transform="translate(674.8 392)">
+      <rect width="237.2" height="44" rx="22" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
+      <circle cx="20" cy="22" r="6" fill="#4fd67c"/>
+      <text x="36" y="28" fill="#c7d3ee" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18">Zero runtime deps</text>
+    </g>
+    <g transform="translate(926 392)">
+      <rect width="202.4" height="44" rx="22" fill="#ffffff" fill-opacity="0.05" stroke="#ffffff" stroke-opacity="0.14"/>
+      <circle cx="20" cy="22" r="6" fill="#c8cfe0"/>
+      <text x="36" y="28" fill="#c7d3ee" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif" font-size="18">Encrypted sync</text>
+    </g>
+
+  <text x="72" y="512" font-family="'JetBrains Mono', 'SFMono-Regular', Consolas, monospace" font-size="21" fill="#6f83a8">github.com/LIN4CRE/digipoke</text>
+  
+
+  <!-- the three starters, straight from the shipped renderer -->
+  
+    <g>
+      <ellipse cx="830" cy="436" rx="88.2" ry="11.55" fill="#05070f" opacity="0.55"/>
+      <g transform="translate(725 220)"><div class="portrait" style="--aura:#ff6b3d">
+    <div class="portrait__ring"></div>
+    <div class="portrait__platform"></div>
+    <div class="portrait__art"><svg class="sprite sp--idle" width="210" height="210" viewBox="0 0 120 120" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bodysp1" x1="0.25" y1="0" x2="0.62" y2="1"><stop offset="0%" stop-color="#ffa27d"/><stop offset="45%" stop-color="#ff7a45"/><stop offset="100%" stop-color="#bd5a33"/></linearGradient><radialGradient id="bellysp1" cx="0.5" cy="0.34" r="0.72"><stop offset="0%" stop-color="#ffe19a" stop-opacity="0.96"/><stop offset="70%" stop-color="#ffd166" stop-opacity="0.55"/><stop offset="100%" stop-color="#e0b85a" stop-opacity="0.08"/></radialGradient><radialGradient id="aurasp1" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#ff6b3d" stop-opacity="0.34"/><stop offset="62%" stop-color="#ff6b3d" stop-opacity="0.12"/><stop offset="100%" stop-color="#ff6b3d" stop-opacity="0"/></radialGradient><linearGradient id="sheensp1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><ellipse class="sp-shadow" cx="60" cy="110" rx="32" ry="6.5" fill="#04070e" opacity="0.34"/><circle cx="60" cy="62" r="55" fill="url(#aurasp1)"/><g transform="translate(120,0) scale(-1,1)"><g class="sp-body"><path class="sp-tail" d="M86 70 q15.6 -4.4 26 -22" fill="none" stroke="#ff7a45" stroke-width="9" stroke-linecap="round"/><path d="M86 70 q15.6 -4.4 26 -22" fill="none" stroke="#ffd166" stroke-width="4" stroke-linecap="round" opacity="0.55"/><rect x="34" y="84" width="14" height="24" rx="7" fill="#db693b" stroke="#914527" stroke-width="1.6"/><circle cx="41" cy="106.5" r="5.88" fill="#e1815a" stroke="#914527" stroke-width="1.2"/><rect x="50" y="86" width="14" height="22" rx="7" fill="#cc6237" stroke="#874124" stroke-width="1.6"/><circle cx="57" cy="106.5" r="5.88" fill="#d47b57" stroke="#874124" stroke-width="1.2"/><rect x="68" y="86" width="14" height="22" rx="7" fill="#cc6237" stroke="#874124" stroke-width="1.6"/><circle cx="75" cy="106.5" r="5.88" fill="#d47b57" stroke="#874124" stroke-width="1.2"/><rect x="82" y="84" width="14" height="24" rx="7" fill="#db693b" stroke="#914527" stroke-width="1.6"/><circle cx="89" cy="106.5" r="5.88" fill="#e1815a" stroke="#914527" stroke-width="1.2"/><ellipse cx="56" cy="70" rx="36" ry="24" fill="url(#bodysp1)" stroke="#8f4427" stroke-width="2.6"/><clipPath id="clipsp1"><circle cx="50" cy="74" r="30"/></clipPath><g clip-path="url(#clipsp1)"><path d="M20 80 q30 -12 60 2" stroke="#ffd166" stroke-width="4.5" fill="none" opacity="0.8" stroke-linecap="round"/>
+               <path d="M20 92 q30 -12 60 2" stroke="#ffd166" stroke-width="4" fill="none" opacity="0.6" stroke-linecap="round"/></g><ellipse cx="58" cy="82" rx="24" ry="12" fill="url(#bellysp1)"/><ellipse cx="43.76" cy="59.92" rx="15.12" ry="6.24" fill="url(#sheensp1)" transform="rotate(-24 43.76 59.92)"/><ellipse cx="86" cy="50" rx="21" ry="19" fill="url(#bodysp1)" stroke="#8f4427" stroke-width="2.6"/><path d="M74 62 q11 9 22 3" stroke="#8f4427" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.65"/><g class="sp-eyes"><ellipse cx="81.8" cy="46" rx="8" ry="8.8" fill="#ffffff" stroke="#8a4225" stroke-width="1.4"/><ellipse cx="82.8" cy="46.6" rx="5.0" ry="5.8" fill="#bd9b4b"/><ellipse cx="82.8" cy="46.4" rx="2.4" ry="3.2" fill="#141821"/><circle cx="79.9" cy="43.6" r="2.4" fill="#fff" opacity="0.95"/><circle cx="85.2" cy="48.7" r="1.2" fill="#fff" opacity="0.7"/><ellipse cx="98.2" cy="46" rx="8" ry="8.8" fill="#ffffff" stroke="#8a4225" stroke-width="1.4"/><ellipse cx="99.2" cy="46.6" rx="5.0" ry="5.8" fill="#bd9b4b"/><ellipse cx="99.2" cy="46.4" rx="2.4" ry="3.2" fill="#141821"/><circle cx="96.3" cy="43.6" r="2.4" fill="#fff" opacity="0.95"/><circle cx="101.6" cy="48.7" r="1.2" fill="#fff" opacity="0.7"/></g><path d="M89.05 60 Q94 65.58 98.95 60" fill="none" stroke="#3a2f38" stroke-width="2.2" stroke-linecap="round"/></g></g></svg></div>
+  </div></g>
+    </g>
+  
+    <g>
+      <ellipse cx="1010" cy="458" rx="102.47999999999999" ry="13.42" fill="#05070f" opacity="0.55"/>
+      <g transform="translate(888 208)"><div class="portrait" style="--aura:#3db4ff">
+    <div class="portrait__ring"></div>
+    <div class="portrait__platform"></div>
+    <div class="portrait__art"><svg class="sprite sp--idle" width="244" height="244" viewBox="0 0 120 120" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bodysp2" x1="0.25" y1="0" x2="0.62" y2="1"><stop offset="0%" stop-color="#79c3f8"/><stop offset="45%" stop-color="#3fa9f5"/><stop offset="100%" stop-color="#2f7db5"/></linearGradient><radialGradient id="bellysp2" cx="0.5" cy="0.34" r="0.72"><stop offset="0%" stop-color="#c6efff" stop-opacity="0.96"/><stop offset="70%" stop-color="#a8e6ff" stop-opacity="0.55"/><stop offset="100%" stop-color="#94cae0" stop-opacity="0.08"/></radialGradient><radialGradient id="aurasp2" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#3db4ff" stop-opacity="0.34"/><stop offset="62%" stop-color="#3db4ff" stop-opacity="0.12"/><stop offset="100%" stop-color="#3db4ff" stop-opacity="0"/></radialGradient><linearGradient id="sheensp2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><ellipse class="sp-shadow" cx="60" cy="110" rx="32" ry="6.5" fill="#04070e" opacity="0.34"/><circle cx="60" cy="62" r="55" fill="url(#aurasp2)"/><g transform="translate(120,0) scale(-1,1)"><g class="sp-body"><path d="M92 66 q-30 -34 -60 0 q30 34 60 0z" fill="url(#bodysp2)" stroke="#235f89" stroke-width="2.6"/><clipPath id="clipsp2"><circle cx="66" cy="68" r="24"/></clipPath><g clip-path="url(#clipsp2)"><circle cx="55.92" cy="70.4" r="5.76" fill="#a8e6ff" opacity="0.85"/>
+               <circle cx="74.64" cy="63.68" r="4.08" fill="#a8e6ff" opacity="0.75"/>
+               <circle cx="67.92" cy="79.04" r="3.3600000000000003" fill="#a8e6ff" opacity="0.65"/></g><path d="M32 66 l-16 -14 v28 z" fill="#a8e6ff" stroke="#235f89" stroke-width="2" stroke-linejoin="round"/><path d="M62 40 q-6 -18 10 -22 q2 12 -4 20 z" fill="#a8e6ff" stroke="#235f89" stroke-width="1.8"/><ellipse cx="60" cy="76" rx="24" ry="10" fill="url(#bellysp2)"/><ellipse cx="56.48" cy="53.6" rx="11.76" ry="5.2" fill="url(#sheensp2)" transform="rotate(-24 56.48 53.6)"/><g class="sp-eyes"><ellipse cx="75.3" cy="58" rx="8.5" ry="9.4" fill="#ffffff" stroke="#225b84" stroke-width="1.4"/><ellipse cx="76.3" cy="58.7" rx="5.3" ry="6.1" fill="#7caabd"/><ellipse cx="76.3" cy="58.4" rx="2.5" ry="3.4" fill="#141821"/><circle cx="73.2" cy="55.5" r="2.5" fill="#fff" opacity="0.95"/><circle cx="78.9" cy="60.9" r="1.3" fill="#fff" opacity="0.7"/><ellipse cx="92.7" cy="58" rx="8.5" ry="9.4" fill="#ffffff" stroke="#225b84" stroke-width="1.4"/><ellipse cx="93.7" cy="58.7" rx="5.3" ry="6.1" fill="#7caabd"/><ellipse cx="93.7" cy="58.4" rx="2.5" ry="3.4" fill="#141821"/><circle cx="90.7" cy="55.5" r="2.5" fill="#fff" opacity="0.95"/><circle cx="96.3" cy="60.9" r="1.3" fill="#fff" opacity="0.7"/></g><ellipse cx="66" cy="72" rx="6" ry="3.6" fill="#ff7d9c" opacity="0.28"/><ellipse cx="102" cy="72" rx="6" ry="3.6" fill="#ff7d9c" opacity="0.28"/><path d="M85.05 72 Q90 77.58 94.95 72" fill="none" stroke="#3a2f38" stroke-width="2.2" stroke-linecap="round"/></g></g></svg></div>
+  </div></g>
+    </g>
+  
+    <g>
+      <ellipse cx="1185" cy="436" rx="88.2" ry="11.55" fill="#05070f" opacity="0.55"/>
+      <g transform="translate(1080 220)"><div class="portrait" style="--aura:#4fd67c">
+    <div class="portrait__ring"></div>
+    <div class="portrait__platform"></div>
+    <div class="portrait__art"><svg class="sprite sp--idle" width="210" height="210" viewBox="0 0 120 120" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bodysp3" x1="0.25" y1="0" x2="0.62" y2="1"><stop offset="0%" stop-color="#8cd697"/><stop offset="45%" stop-color="#5ac46a"/><stop offset="100%" stop-color="#43914e"/></linearGradient><radialGradient id="bellysp3" cx="0.5" cy="0.34" r="0.72"><stop offset="0%" stop-color="#76b58a" stop-opacity="0.96"/><stop offset="70%" stop-color="#2f8f4e" stop-opacity="0.55"/><stop offset="100%" stop-color="#297e45" stop-opacity="0.08"/></radialGradient><radialGradient id="aurasp3" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#4fd67c" stop-opacity="0.34"/><stop offset="62%" stop-color="#4fd67c" stop-opacity="0.12"/><stop offset="100%" stop-color="#4fd67c" stop-opacity="0"/></radialGradient><linearGradient id="sheensp3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><ellipse class="sp-shadow" cx="60" cy="110" rx="32" ry="6.5" fill="#04070e" opacity="0.34"/><circle cx="60" cy="62" r="55" fill="url(#aurasp3)"/><g transform="translate(120,0) scale(-1,1)"><g class="sp-body"><rect x="28" y="88" width="15" height="16" rx="7.5" fill="#4fac5d" stroke="#34723d" stroke-width="1.6"/><circle cx="35.5" cy="102.5" r="6.3" fill="#6bb977" stroke="#34723d" stroke-width="1.2"/><rect x="76" y="88" width="15" height="16" rx="7.5" fill="#4fac5d" stroke="#34723d" stroke-width="1.6"/><circle cx="83.5" cy="102.5" r="6.3" fill="#6bb977" stroke="#34723d" stroke-width="1.2"/><ellipse cx="60" cy="66" rx="38" ry="35" fill="url(#bodysp3)" stroke="#326e3b" stroke-width="2.6"/><clipPath id="clipsp3"><circle cx="60" cy="70" r="34"/></clipPath><g clip-path="url(#clipsp3)"><path d="M60 53 q23.799999999999997 -18.700000000000003 6.800000000000001 28.9 q-21.08 1.7000000000000002 -6.800000000000001 -28.9z" fill="#2f8f4e" opacity="0.85"/>
+               <path d="M60 63.2 l13.600000000000001 14.28" stroke="#216437" stroke-width="1.6" fill="none" opacity="0.6"/></g><ellipse cx="60" cy="80" rx="21" ry="17" fill="url(#bellysp3)"/><ellipse cx="47.08" cy="51.3" rx="15.959999999999999" ry="9.1" fill="url(#sheensp3)" transform="rotate(-24 47.08 51.3)"/><rect x="20" y="70" width="13" height="12" rx="6.5" fill="#53b462" stroke="#377741" stroke-width="1.6"/><circle cx="26.5" cy="80.5" r="5.46" fill="#6fc07b" stroke="#377741" stroke-width="1.2"/><rect x="87" y="70" width="13" height="12" rx="6.5" fill="#53b462" stroke="#377741" stroke-width="1.6"/><circle cx="93.5" cy="80.5" r="5.46" fill="#6fc07b" stroke="#377741" stroke-width="1.2"/><path d="M54.6 34 L60 16 L65.4 34 Z" fill="#2f8f4e" stroke="#367640" stroke-width="1.5" stroke-linejoin="round"/><g class="sp-eyes"><ellipse cx="50.3" cy="60" rx="9.5" ry="10.5" fill="#ffffff" stroke="#316a39" stroke-width="1.4"/><ellipse cx="51.4" cy="60.8" rx="5.9" ry="6.8" fill="#236a3a"/><ellipse cx="51.4" cy="60.5" rx="2.9" ry="3.8" fill="#141821"/><circle cx="48.0" cy="57.1" r="2.9" fill="#fff" opacity="0.95"/><circle cx="54.3" cy="63.2" r="1.4" fill="#fff" opacity="0.7"/><ellipse cx="69.7" cy="60" rx="9.5" ry="10.5" fill="#ffffff" stroke="#316a39" stroke-width="1.4"/><ellipse cx="70.9" cy="60.8" rx="5.9" ry="6.8" fill="#236a3a"/><ellipse cx="70.9" cy="60.5" rx="2.9" ry="3.8" fill="#141821"/><circle cx="67.5" cy="57.1" r="2.9" fill="#fff" opacity="0.95"/><circle cx="73.7" cy="63.2" r="1.4" fill="#fff" opacity="0.7"/></g><ellipse cx="40" cy="74" rx="6" ry="3.6" fill="#ff7d9c" opacity="0.42"/><ellipse cx="80" cy="74" rx="6" ry="3.6" fill="#ff7d9c" opacity="0.42"/><path d="M54.5 74 Q60 80.2 65.5 74" fill="none" stroke="#3a2f38" stroke-width="2.2" stroke-linecap="round"/></g></g></svg></div>
+  </div></g>
+    </g>
+
+  <rect x="0" y="630" width="129" height="10" fill="#ff6b3d" opacity="0.85"/><rect x="128" y="630" width="129" height="10" fill="#3db4ff" opacity="0.85"/><rect x="256" y="630" width="129" height="10" fill="#4fd67c" opacity="0.85"/><rect x="384" y="630" width="129" height="10" fill="#ffd93d" opacity="0.85"/><rect x="512" y="630" width="129" height="10" fill="#c98a4b" opacity="0.85"/><rect x="640" y="630" width="129" height="10" fill="#9fe8ff" opacity="0.85"/><rect x="768" y="630" width="129" height="10" fill="#7fdcff" opacity="0.85"/><rect x="896" y="630" width="129" height="10" fill="#b48cff" opacity="0.85"/><rect x="1024" y="630" width="129" height="10" fill="#ff5fa2" opacity="0.85"/><rect x="1152" y="630" width="129" height="10" fill="#c8cfe0" opacity="0.85"/>
+</svg>

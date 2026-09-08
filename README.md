@@ -1,4 +1,18 @@
-# 🚀 DigiPoke
+<div align="center">
+  <img src=".github/assets/banner.svg" alt="DigiPoke" width="100%">
+
+  <p>
+    <a href="https://github.com/LIN4CRE/digipoke/actions/workflows/ci.yml"><img src="https://github.com/LIN4CRE/digipoke/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+    <a href="https://github.com/LIN4CRE/digipoke/actions/workflows/pages.yml"><img src="https://github.com/LIN4CRE/digipoke/actions/workflows/pages.yml/badge.svg" alt="Deploy Pages"></a>
+    <a href="https://github.com/LIN4CRE/digipoke/blob/main/tests/"><img src="https://img.shields.io/badge/tests-40%2F40%20passing-brightgreen" alt="tests"></a>
+    <a href="https://github.com/LIN4CRE/digipoke/blob/main/LICENSE"><img src="https://img.shields.io/badge/licence-MIT-green" alt="MIT licence"></a>
+    <img src="https://img.shields.io/badge/runtime%20dependencies-0-blue" alt="zero runtime dependencies">
+  </p>
+
+  <p><b>▶ <a href="https://lin4cre.github.io/digipoke/">Play it in your browser</a></b> — no install, no account, works offline after the first load.</p>
+</div>
+
+## DigiPoke
 
 **A local-first creature-collecting battler.** Raise, battle and evolve digital life —
 entirely on your device. Installable PWA, works offline, zero runtime dependencies,
@@ -76,6 +90,7 @@ so the whole game stays ~400 KB and works offline.
 | `npm test` | 40 tests (domain, API, headless-browser journeys) |
 | `npm run lint` | Import resolution, precache list, placeholders, external URLs, **CSS class coverage** |
 | `npm run art` | Regenerate `previews/gallery.html` (every creature, Tamer avatars, expressions) |
+| `npm run banner` | Regenerate `.github/assets/banner.{svg,png}` from the shipped renderers |
 | `npm run build:single` | Bundle everything into one self-contained `dist/digipoke.html` |
 | `npm run verify:single` | Boot-test that single file (replays its module loader in Node) |
 | `npm run tunnel` | Publish the local PWA at a public `https://….lhr.life` URL (no account) |
